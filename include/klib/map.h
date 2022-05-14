@@ -3,7 +3,7 @@
 
 #include "klib/vector.h"
 
-typedef int (*klib_compare_func_t)(void *a, void *b);
+typedef int (*klib_compare_func_t)(const void *a, const void *b);
 
 typedef struct klib_Map {
     size_t key_size;
