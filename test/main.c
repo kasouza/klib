@@ -13,8 +13,7 @@ void print(klib_Map *map, int key) {
 void set(klib_Map *map, int key, int val) { klib_map_set(map, &key, &val); }
 
 int main() {
-    klib_Map map;
-    klib_init_map(&map, sizeof(int), sizeof(int), compare_ints);
+    klib_Map map = klib_create_map(sizeof(int), sizeof(int), compare_ints);
 
     set(&map, 3, 32);
     set(&map, 4, 85);

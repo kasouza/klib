@@ -13,14 +13,15 @@ typedef struct klib_Map {
     klib_Vector values;
 
     klib_compare_func_t compare;
+    bool ok;
 } klib_Map;
 
-int klib_init_map(klib_Map *map, size_t key_size, size_t value_size,
-                  klib_compare_func_t compare);
-int klib_free_map(klib_Map *map);
+klib_Map klib_create_map(size_t key_size, size_t value_size,
+                             klib_compare_func_t compare);
+bool klib_free_map(klib_Map *map);
 
 void *klib_map_get(klib_Map *map, void *key);
-void *klib_map_set(klib_Map *map, void *key, void *value);
-int klib_map_delete(klib_Map *map, void *key);
+bool klib_map_set(klib_Map *map, void *key, void *value);
+bool klib_map_delete(klib_Map *map, void *key);
 
 #endif
