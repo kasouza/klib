@@ -1,7 +1,10 @@
-#include "klib/map.h"
-#include <klib/vector.h>
+#include "klib/container/map.h"
+#include "klib/math/vec2.h"
+#include "klib/math/vec3.h"
+#include <klib/container/array_list.h>
 
 #include <stdio.h>
+#include <math.h>
 
 int compare_ints(void *a, void *b) { return (*(int *)a) - (*(int *)b); }
 
@@ -13,17 +16,17 @@ void print(klib_Map *map, int key) {
 void set(klib_Map *map, int key, int val) { klib_map_set(map, &key, &val); }
 
 int main() {
-    klib_Map map = klib_create_map(sizeof(int), sizeof(int), compare_ints);
+    Vec3 vec;
+    vec.x = 5;
+    vec.y = 0;
+    vec.z = 1;
 
-    set(&map, 3, 32);
-    set(&map, 4, 85);
-    set(&map, 5, 54);
+    Vec3 vec2;
+    vec2.x = 0;
+    vec2.y = 5;
+    vec2.z = 0;
 
-    print(&map, 3);
-    print(&map, 4);
-    print(&map, 5);
-
-    klib_free_map(&map);
+    printf("%f\n", klib_vec3_angle(vec, vec2) * 180 / M_PI);   
 
     return 0;
 }

@@ -1,7 +1,7 @@
-#ifndef KASOUZA_KLIB_INCLUDE_KLIB_MAP_H
-#define KASOUZA_KLIB_INCLUDE_KLIB_MAP_H
+#ifndef KASOUZA_KLIB_INCLUDE_KLIB_CONTAINER_MAP_H
+#define KASOUZA_KLIB_INCLUDE_KLIB_CONTAINER_MAP_H
 
-#include "klib/vector.h"
+#include "klib/container/array_list.h"
 
 typedef int (*klib_compare_func_t)(const void *a, const void *b);
 
@@ -9,8 +9,8 @@ typedef struct klib_Map {
     size_t key_size;
     size_t value_size;
 
-    klib_Vector keys;
-    klib_Vector values;
+    klib_ArrayList keys;
+    klib_ArrayList values;
 
     klib_compare_func_t compare;
     bool ok;

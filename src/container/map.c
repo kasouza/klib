@@ -1,5 +1,6 @@
-#include "klib/map.h"
-#include "klib/vector.h"
+#include "klib/container/map.h"
+#include "klib/container/array_list.h"
+
 #include <string.h>
 
 klib_Map klib_create_map(size_t key_size, size_t value_size,
@@ -11,14 +12,14 @@ klib_Map klib_create_map(size_t key_size, size_t value_size,
         return map;
     }
 
-    map.keys = klib_create_vector(key_size);
+    map.keys = klib_create_array_list(key_size);
     if (!map.keys.ok) {
         return map;
     }
 
-    map.values = klib_create_vector(value_size);
+    map.values = klib_create_array_list(value_size);
     if (!map.values.ok) {
-        klib_free_vector(&map.keys);
+        klib_free_array_list(&map.keys);
         return map;
     }
 
@@ -31,11 +32,11 @@ klib_Map klib_create_map(size_t key_size, size_t value_size,
 }
 
 bool klib_free_map(klib_Map *map) {
-    if (!klib_free_vector(&map->keys)) {
+    if (!klib_free_array_list(&map->keys)) {
         return false;
     }
 
-    if (!klib_free_vector(&map->values)) {
+    if (!klib_free_array_list(&map->values)) {
         return false;
     }
 
@@ -48,8 +49,8 @@ void *klib_map_get(klib_Map *map, void *key) {
     void *value = NULL;
 
     for (size_t i = 0; i < map->keys.length; i++) {
-        if (map->compare(klib_vector_get(&map->keys, i), key) == 0) {
-            value = klib_vector_get(&map->values, i);
+        if (map->compare(klib_array_list_get(&map->keys, i), key) == 0) {
+            value = klib_array_list_get(&map->values, i);
             break;
         }
     }
@@ -63,8 +64,8 @@ bool klib_map_set(klib_Map *map, void *key, void *value) {
         memcpy(value_ptr, value, map->value_size);
 
     } else {
-        if (!klib_vector_push(&map->keys, key) ||
-            !klib_vector_push(&map->values, value)) {
+        if (!klib_array_list_push(&map->keys, key) ||
+            !klib_array_list_push(&map->values, value)) {
             return false;
         }
     }
@@ -74,10 +75,10 @@ bool klib_map_set(klib_Map *map, void *key, void *value) {
 
 bool klib_map_delete(klib_Map *map, void *key) {
     for (size_t i = 0; i < map->keys.length; i++) {
-        if (map->compare(klib_vector_get(&map->keys, i),
-                         klib_vector_get(&map->values, i)) == 0) {
-            klib_vector_delete(&map->keys, i);
-            klib_vector_delete(&map->values, i);
+        if (map->compare(klib_array_list_get(&map->keys, i),
+                         klib_array_list_get(&map->values, i)) == 0) {
+            klib_array_list_delete(&map->keys, i);
+            klib_array_list_delete(&map->values, i);
             return true;
         }
     }
