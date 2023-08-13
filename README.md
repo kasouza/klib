@@ -24,6 +24,4 @@ cd build
 cmake .. && cmake --build
 ```
 
-Then link it to your project.
-
-It's all posible to simple add as a library directly to you CMake project with target_link_libraries.
+It's also posible to simple add as a library directly to you CMake project with target_link_libraries.
