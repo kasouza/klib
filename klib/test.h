@@ -33,6 +33,10 @@ typedef struct {
 
 #define t_ASSERT_EQ(a, b) t_ASSERT((a) == (b))
 
+#define t_ASSERT_NULL(a) t_ASSERT((a) == NULL)
+
+#define t_ASSERT_NOT_NULL(a) t_ASSERT((a) != NULL)
+
 void t_register_named_test(const char *name, t_test_func test);
 void t_run_tests();
 
