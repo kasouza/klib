@@ -10,6 +10,8 @@ set(TEST_NAME test_${PROJECT_NAME})
 # Main library
 add_library(
     ${LIB_NAME} STATIC
+
+    klib/dummy.c
 )
 
 target_compile_features(${LIB_NAME} PRIVATE c_std_17)
@@ -21,6 +23,7 @@ add_executable(
 
     klib/test.c
     klib/dynarr.test.c
+    klib/hash_map.test.c
 )
 
 target_compile_features(${TEST_NAME} PRIVATE c_std_17)
