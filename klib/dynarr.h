@@ -6,7 +6,7 @@
 #define KLIB_DYNARR_INITIAL_SIZE 8
 #define KLIB_DYNARR_SCALE_FACTOR 2
 
-#define KLIB_DYNARR(type) KbuildDynarr_##type
+#define KLIB_DYNARR(type) klib_Dynarr_##type
 
 #define KLIB_DYNARR_DECLARE(type)                                              \
     typedef struct {                                                           \
@@ -15,10 +15,10 @@
         int cap;                                                               \
     } KLIB_DYNARR(type);                                                       \
                                                                                \
-    KLIB_DYNARR(type) * kbuild_create_dynarr_##type();
+    KLIB_DYNARR(type) * klib_create_dynarr_##type();
 
 #define KLIB_DYNARR_DEFINE(type)                                               \
-    KLIB_DYNARR(type) * kbuild_create_dynarr_##type() {                        \
+    KLIB_DYNARR(type) * klib_create_dynarr_##type() {                        \
         KLIB_DYNARR(type) *arr = malloc(sizeof(KLIB_DYNARR(type)));            \
         arr->buffer = malloc(sizeof(type) * KLIB_DYNARR_INITIAL_SIZE);         \
         arr->cap = KLIB_DYNARR_INITIAL_SIZE;                                   \
@@ -26,7 +26,7 @@
         return arr;                                                            \
     }
 
-#define KLIB_DYNARR_CREATE(type) kbuild_create_dynarr_##type()
+#define KLIB_DYNARR_CREATE(type) klib_create_dynarr_##type()
 
 #define KLIB_DYNARR_FREE(dynarr)                                               \
     do {                                                                       \
